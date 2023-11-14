@@ -13,14 +13,11 @@ public class RoomDto
     private Integer id;
     private Integer version;
     private Integer price;
-
-    @NotNull( message = "The Number is mandatory"  , groups = {InsertValidation.class, UpdateValidation.class})
+    @NotNull(message = "The Number is mandatory", groups = {InsertValidation.class, UpdateValidation.class})
     private Integer number;
-    @NotBlank( message = "The Floor is mandatory"  , groups = {InsertValidation.class, UpdateValidation.class})
+    @NotBlank(message = "The Floor is mandatory", groups = {InsertValidation.class, UpdateValidation.class})
     private String floor;
-
     private Boolean complete;
-
     private HotelDto hotel;
 
 }

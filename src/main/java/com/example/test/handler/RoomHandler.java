@@ -1,10 +1,8 @@
 package com.example.test.handler;
 
-import com.example.test.dto.BookingDto;
 import com.example.test.dto.RoomDto;
 import com.example.test.dto.commen.PaginatedResultDto;
-import com.example.test.entity.Booking;
-import com.example.test.entity.Response;
+import com.example.test.dto.Response;
 import com.example.test.entity.Room;
 import com.example.test.exception.ErrorCodes;
 import com.example.test.exception.ResourceAlreadyExistsException;
@@ -38,10 +36,6 @@ public class RoomHandler
         Optional<Room> existedNumber = roomService.findRoomNumber(Integer.valueOf(dto.getNumber()), dto.getHotel().getId());
         if (existedNumber.isPresent())
             throw new ResourceAlreadyExistsException(Room.class.getSimpleName(), "Number", String.valueOf(dto.getNumber()), ErrorCodes.DUPLICATE_RESOURCE.getCode());
-
-//        Room room1 = roomService.getById(dto.getId())
-//                .orElseThrow(() -> new ResourceNotFoundException(Room.class.getSimpleName(), dto.getId()));
-//
 
         Room room = mapper.toEntity(dto);
         room.setHotel(hotelService.getById(dto.getHotel().getId()).get());

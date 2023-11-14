@@ -44,15 +44,6 @@ public class RoomController
         return roomHandler.getByRoomComplete(complete,page, size);
     }
 
-//    @GetMapping("/complete")
-//    @Operation(summary = "Get All", description = "this api for get all not complete rooms")
-//    public ResponseEntity<?> getByRoomFull(
-//            @RequestParam(value = "page" , defaultValue = "0") Integer page ,
-//            @RequestParam (value = "size" , defaultValue = "10") Integer size)
-//    {
-//        return roomHandler.getByRoomFull(page, size);
-//    }
-
     @GetMapping("/{id}")
     @Operation(summary = "Get By Id", description = "this api for get room by id")
     public ResponseEntity<?> getById(@PathVariable("id") Integer id)

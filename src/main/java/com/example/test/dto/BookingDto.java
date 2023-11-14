@@ -24,7 +24,7 @@ public class BookingDto
     private LocalDate today;
     private LocalDate ToDate;
     private HotelDto hotel;
-//    private CustomerDto customer;
+    private  LocalDate checkoutDate;
     private RoomDto room;
     private Boolean confirm;
     private UserDto user;

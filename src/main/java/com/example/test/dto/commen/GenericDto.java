@@ -1,4 +1,4 @@
-package com.example.test.dto;
+package com.example.test.dto.commen;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

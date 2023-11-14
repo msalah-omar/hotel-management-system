@@ -26,13 +26,11 @@ public interface BookingRepository extends JpaRepository<Booking, Integer>
     Page<Booking> findAllBooking(Pageable pageable);
 
     @Query("SELECT b FROM Booking b WHERE b.hotel.id = :hotelId AND b.room.id = :roomId")
-    Booking findByRoomIdAndHotelId(@Param("hotelId") Integer hotelId, Integer roomId);
+    Booking findByRoomIdAndHotelId(@Param("hotelId") Integer hotelId,@Param("roomId") Integer roomId);
 
     @Query(value = "select b from Booking b JOIN FETCH b.hotel JOIN FETCH b.room JOIN FETCH b.user where b.id = :id")
     Booking getById(@Param("id") Integer id);
 
-    @Query(value = "select b from Booking b JOIN  FETCH b.user where b.id = :id" )
-    List<Booking> getSearchCustomerReservationNumberDate(@Param("id") Integer id);
 
     @Query(value = "select b from Booking b where b.user.id = :id ")
     List<Booking> userViewsBooking(@Param("id") Integer id);

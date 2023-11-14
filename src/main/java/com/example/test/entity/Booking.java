@@ -16,9 +16,6 @@ import java.util.Date;
 @Table(name = "booking")
 public class Booking extends JPAEntity
 {
-
-
-
     @Column (name = "TYPE")
     private String type;
 
@@ -30,6 +27,9 @@ public class Booking extends JPAEntity
 
     @Column (name = "to_date")
     private  LocalDate toDate;
+
+    @Column (name = "checkout_date")
+    private  LocalDate checkoutDate;
 
     @Column (name = "confirm")
     private Boolean confirm;

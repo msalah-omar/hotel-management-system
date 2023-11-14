@@ -18,7 +18,4 @@ public class RoomType extends JPAEntity
     private String nameEnglish;
 
 
-
-
-
 }

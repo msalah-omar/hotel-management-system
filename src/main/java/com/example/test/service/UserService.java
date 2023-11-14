@@ -1,6 +1,5 @@
 package com.example.test.service;
 
-import com.example.test.dto.ChangePasswordDto;
 import com.example.test.entity.User;
 import com.example.test.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -8,11 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -53,6 +49,10 @@ public class UserService {
     public Optional<User> getByUserName(String username)
     {
 
+        return userRepository.findUserByUsername(username);
+    }
+    public Optional<User> getSearchUser(String username)
+    {
         return userRepository.findUserByUsername(username);
     }
 

@@ -18,19 +18,21 @@ public class RoomService
 
     public Page<Room> getAll(Integer page, Integer size)
     {
-        return (Page<Room>) roomRepository.findAll(PageRequest.of(page,size));
+        return (Page<Room>) roomRepository.findAll(PageRequest.of(page, size));
     }
 
-    public Optional<Room> getById(Integer id )
+    public Optional<Room> getById(Integer id)
     {
         return roomRepository.findById(id);
     }
 
-    public Page<Room> getByRoomComplete(Boolean complete,Integer page, Integer size) {
+    public Page<Room> getByRoomComplete(Boolean complete, Integer page, Integer size)
+    {
         return roomRepository.findByRoomComplete(complete, PageRequest.of(page, size));
     }
 
-    public Page<Room> getByRoomFull(Integer page, Integer size) {
+    public Page<Room> getByRoomFull(Integer page, Integer size)
+    {
         return roomRepository.findByRoomFull(PageRequest.of(page, size));
     }
 
@@ -44,7 +46,8 @@ public class RoomService
         return roomRepository.save(room);
     }
 
-    public Optional<Room> findRoomNumber(Integer number, Integer hotelId) {
+    public Optional<Room> findRoomNumber(Integer number, Integer hotelId)
+    {
         return Optional.ofNullable(roomRepository.findByNumber(number, hotelId));
     }
 

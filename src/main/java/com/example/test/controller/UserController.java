@@ -49,6 +49,10 @@ public class UserController {
     public ResponseEntity<?> update(@Validated(UpdateValidation.class)@PathVariable Integer id, @RequestBody UserDto usersDto) {
         return userHandler.update(id, usersDto);
     }
+    @GetMapping("/search-user")
+    public ResponseEntity<?> getSearchUser(@RequestParam(value = "username") String username) {
+        return userHandler.getSearchUser(username);
+    }
 
     @PostMapping("/change-password/{id}")
     @Operation(summary = " User")

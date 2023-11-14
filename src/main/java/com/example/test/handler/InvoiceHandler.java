@@ -1,13 +1,13 @@
 package com.example.test.handler;
 
 
-import com.example.test.dto.BookingDto;
 import com.example.test.dto.InvoiceDto;
+import com.example.test.dto.SafeDto;
 import com.example.test.dto.commen.PaginatedResultDto;
 
 import com.example.test.entity.Booking;
 import com.example.test.entity.Invoice;
-import com.example.test.entity.Response;
+import com.example.test.dto.Response;
 import com.example.test.entity.Safe;
 import com.example.test.exception.ErrorCodes;
 import com.example.test.exception.ResourceNotFoundException;
@@ -61,15 +61,14 @@ public class InvoiceHandler
         safe.setCacheIn(cacheIn);
         safeService.save(safe);
 
-
         return ResponseEntity.ok(mapper.toDto(invoice));
     }
 
-    public ResponseEntity<?> getAllIBookingInvoices(Integer id)
+    public ResponseEntity<?> getAllIBookingInvoices(Integer userId)
     {
-        Invoice invoice1 = invoiceService.getById(id).
-                orElseThrow(() -> new ResourceNotFoundException(Invoice.class.getSimpleName(), id));
-        List<Invoice> invoice = invoiceService.getAllIBookingInvoices(id);
+        Invoice invoice1 = invoiceService.getById(userId).
+                orElseThrow(() -> new ResourceNotFoundException(Invoice.class.getSimpleName(), userId));
+        List<Invoice> invoice = invoiceService.getAllIBookingInvoices(userId);
         List<InvoiceDto> dtos = mapper.toDto(invoice);
         return ResponseEntity.ok(dtos);
     }
@@ -84,11 +83,7 @@ public class InvoiceHandler
         paginatedResultDto.setPagination(paginationMapper.toPaginationDto(invoices));
         return ResponseEntity.ok(paginatedResultDto);}
 
-    public ResponseEntity<?>getByName(String name)
-    {
-        Invoice invoice = invoiceService.getByName(name);
-        return ResponseEntity.ok(invoice);
-    }
+
 
 
     public ResponseEntity<?> getById(Integer id)
@@ -103,6 +98,7 @@ public class InvoiceHandler
 
         Invoice invoice=invoiceService.getById(id).orElseThrow(
                 ()->new ResourceNotFoundException(Booking.class.getSimpleName(),id));
+
         mapper.updateEntityFromDto(invoiceDto, invoice);
         invoiceService.update(invoice);
         InvoiceDto dto = mapper.toDto(invoice);

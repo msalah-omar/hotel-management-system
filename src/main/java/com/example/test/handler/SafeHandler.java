@@ -1,6 +1,6 @@
 package com.example.test.handler;
 
-import com.example.test.dto.RoomTypeDto;
+import com.example.test.dto.Response;
 import com.example.test.dto.SafeDto;
 import com.example.test.dto.commen.PaginatedResultDto;
 import com.example.test.entity.*;
@@ -8,10 +8,8 @@ import com.example.test.exception.ErrorCodes;
 import com.example.test.exception.ResourceNotFoundException;
 import com.example.test.exception.ResourceRelatedException;
 import com.example.test.mapper.PaginationMapper;
-import com.example.test.mapper.RoomTypeMapper;
 import com.example.test.mapper.SafeMapper;
 import com.example.test.service.HotelService;
-import com.example.test.service.RoomTypeService;
 import com.example.test.service.SafeService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -38,7 +36,7 @@ public class SafeHandler
         Safe safe = safeMapper.toEntity(dto);
 //        safe.setCacheIn(0);
 //        safe.setCacheOut(0);
-//        safe.setHotel(hotelService.getById(dto.getHotel().getId()).get());
+        safe.setHotel(hotelService.getById(dto.getHotel().getId()).get());
         safeService.save(safe);
         return ResponseEntity.ok(safeMapper.toDto(safe));
 

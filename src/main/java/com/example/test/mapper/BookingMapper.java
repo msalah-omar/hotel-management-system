@@ -2,10 +2,8 @@ package com.example.test.mapper;
 
 import com.example.test.dto.BookingDto;
 
-import com.example.test.dto.GenericDto;
 import com.example.test.entity.Booking;
 
-import com.example.test.entity.commen.JPAEntity;
 import org.mapstruct.*;
 
 import java.util.List;

@@ -1,9 +1,11 @@
 package com.example.test.handler;
 
+import com.example.test.dto.BookingDto;
 import com.example.test.dto.ChangePasswordDto;
+import com.example.test.dto.Response;
 import com.example.test.dto.UserDto;
 import com.example.test.dto.commen.PaginatedResultDto;
-import com.example.test.entity.Response;
+import com.example.test.entity.Booking;
 import com.example.test.entity.User;
 import com.example.test.exception.ResourceNotFoundException;
 import com.example.test.mapper.PaginationMapper;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -27,7 +30,6 @@ public class UserHandler {
     private final UserService userService;
     private final UserMapper userMapper;
     private PaginationMapper paginationMapper;
-//    private ChangePasswordDto changePasswordDto;
 
     public ResponseEntity<?> getAll(Integer page, Integer size) {
         Page<User> usersPage = userService.getAll(page, size);
@@ -76,6 +78,13 @@ public class UserHandler {
         User entity = userMapper.updateEntityFromDto(usersDto, user);
         userService.update(entity);
         return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<?> getSearchUser(String username)
+    {
+        User users = userService.getSearchUser(username).get();
+        UserDto dtos = userMapper.toDto(users);
+        return ResponseEntity.ok(dtos);
     }
 
     public ResponseEntity<?> changePassword(ChangePasswordDto changePasswordDto)

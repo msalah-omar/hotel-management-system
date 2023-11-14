@@ -22,7 +22,7 @@ public class InvoiceController
     private InvoiceHandler invoiceHandler;
 
     @GetMapping
-    @Operation(summary = "Get All", description = "this api for get all customers")
+    @Operation(summary = "Get All", description = "this api for get all invoice")
     public ResponseEntity<?> getAll(
             @RequestParam(value = "page" , defaultValue = "0") Integer page ,
             @RequestParam (value = "size" , defaultValue = "10") Integer size)
@@ -31,30 +31,30 @@ public class InvoiceController
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get By Id", description = "this api for get customer by id")
+    @Operation(summary = "Get By Id", description = "this api for get invoice by id")
     public ResponseEntity<?> getById(@PathVariable("id") Integer id)
     {
         return invoiceHandler.getById(id);
     }
 
     @GetMapping("/{id}/installments")
-    @Operation(summary = "Get All Installments", description = "this api for get all installments of Customer")
-    public ResponseEntity<?> getPaymentInstallments(@PathVariable("id") Integer id)
+    @Operation(summary = "Get All Installments", description = "this api for get all installments of Invoice")
+    public ResponseEntity<?> getInvoiceInstallments(@PathVariable("id") Integer id)
     {
         return invoiceHandler.getById(id);
     }
 
     @GetMapping("/invoice-booking")
-    public ResponseEntity<?> getAllIBookingInvoices(@RequestParam(value = "id") Integer id) {
-        return invoiceHandler.getAllIBookingInvoices(id);
+    public ResponseEntity<?> getAllIBookingInvoices(@RequestParam(value = "userId") Integer userId) {
+        return invoiceHandler.getAllIBookingInvoices(userId);
     }
 
 
 
     @PostMapping
-    @Operation(summary = "Add", description = "this api for add new customer")
-    public ResponseEntity<?> save(@Validated(InsertValidation.class)@RequestBody InvoiceDto payment) {
-        return invoiceHandler.save(payment);
+    @Operation(summary = "Add", description = "this api for add new invoice")
+    public ResponseEntity<?> save(@Validated(InsertValidation.class)@RequestBody InvoiceDto invoiceDto) {
+        return invoiceHandler.save(invoiceDto);
     }
 
     @PutMapping("/{id}")
@@ -64,7 +64,7 @@ public class InvoiceController
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "delete payment By Id")
+    @Operation(summary = "delete invoice By Id")
     public ResponseEntity<?> delete(Integer  id) {
         return invoiceHandler.delete(id);
     }

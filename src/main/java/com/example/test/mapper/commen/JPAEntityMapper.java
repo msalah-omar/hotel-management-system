@@ -2,10 +2,12 @@ package com.example.test.mapper.commen;
 
 
 import com.example.test.dto.commen.RestDto;
+import com.example.test.entity.User;
 import com.example.test.entity.commen.JPAEntity;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface JPAEntityMapper<T extends JPAEntity, S extends RestDto> {
 

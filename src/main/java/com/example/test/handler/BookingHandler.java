@@ -3,8 +3,7 @@ package com.example.test.handler;
 import com.example.test.dto.BookingDto;
 import com.example.test.dto.commen.PaginatedResultDto;
 import com.example.test.entity.Booking;
-import com.example.test.entity.Hotel;
-import com.example.test.entity.Response;
+import com.example.test.dto.Response;
 import com.example.test.entity.User;
 import com.example.test.exception.ErrorCodes;
 import com.example.test.exception.ResourceNotFoundException;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,35 +35,26 @@ public class BookingHandler
     private BookingMapper bookingMapper;
 
 
-
     public ResponseEntity<?> confirmBooking(Integer id)
     {
-        Booking booking1 = bookingService.findById(id).
-                orElseThrow(() -> new ResourceNotFoundException(User.class.getSimpleName(), id));
-
-        Booking booking = bookingService.findById(id).get();
+        Booking booking = bookingService.findById(id).orElseThrow(() -> new ResourceNotFoundException(User.class.getSimpleName(), id));
         booking.setConfirm(true);
         bookingService.save(booking);
-        return ResponseEntity.ok("CONFIRMED");
+        return ResponseEntity.ok(new Response("CONFIRMED"));
     }
 
     public ResponseEntity<?> checkoutBooking(Integer id)
 
     {
-        Booking booking1 = bookingService.findById(id).
-                orElseThrow(() -> new ResourceNotFoundException(Booking.class.getSimpleName(), id));
-        Booking booking = bookingService.findById(id).get();
-        booking.setToDate(LocalDate.now());
+        Booking booking = bookingService.findById(id).orElseThrow(() -> new ResourceNotFoundException(Booking.class.getSimpleName(), id));
+        booking.setCheckoutDate(LocalDate.now());
         bookingService.save(booking);
-        return ResponseEntity.ok("CHECKOUT");
+        return ResponseEntity.ok(new Response("CHECKOUT"));
     }
 
-    public ResponseEntity<?> userViewsBooking(Integer id)
+    public ResponseEntity<?> userViewsBooking(Integer userId)
     {
-        Booking booking1 = bookingService.findById(id).
-                orElseThrow(() -> new ResourceNotFoundException(Booking.class.getSimpleName(), id));
-
-        List<Booking> booking = bookingService.userViewsBooking(id);
+        List<Booking> booking = bookingService.userViewsBooking(userId);
         List<BookingDto> dtos = bookingMapper.toDto(booking);
         return ResponseEntity.ok(dtos);
     }
@@ -79,7 +70,6 @@ public class BookingHandler
     {
 
         Booking booking = bookingService.getByRoomIdAndHotelId(hotelId, roomId);
-
         long differenceDate = 0;
         if (LocalDate.now().isBefore(booking.getFromDate()))
         {
@@ -95,7 +85,7 @@ public class BookingHandler
     }
 
 
-    public ResponseEntity<?> save(BookingDto dto, Integer page, Integer size)
+    public ResponseEntity<?> save(BookingDto dto)
     {
         long differenceDate = dto.getFromDate().until(dto.getToDate(), ChronoUnit.DAYS);
         Booking booking = bookingMapper.toEntity(dto);
@@ -154,7 +144,7 @@ public class BookingHandler
         {
             if (booking.getConfirm())
             {
-                return ResponseEntity.ok("can not deleted");
+                return ResponseEntity.ok(new Response("can not deleted"));
             }
             bookingService.delete(booking);
         } catch (Exception exception)

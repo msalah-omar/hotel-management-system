@@ -20,7 +20,6 @@ public class InvoiceService
     {
         return invoiceRepository.findAll(PageRequest.of(page,size));
     }
-
     public List<Invoice> getAllIBookingInvoices(Integer id){
         return  invoiceRepository.getAllIBookingInvoices(id);
     }
@@ -29,10 +28,7 @@ public class InvoiceService
     {
         return invoiceRepository.findById(id);
     }
-    public Invoice getByName(String name)
-    {
-        return invoiceRepository.findByName(name);
-    }
+
     public Invoice getByBookingId(Integer bookingId)
     {
         return invoiceRepository.findByBookingId(bookingId);
@@ -49,6 +45,7 @@ public class InvoiceService
     }
 
     public List<Invoice> delete(Invoice invoice)
+
     {
         invoiceRepository.delete(invoice);
         return null;

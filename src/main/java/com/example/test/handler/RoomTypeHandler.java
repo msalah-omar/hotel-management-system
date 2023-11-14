@@ -1,21 +1,15 @@
 package com.example.test.handler;
 
 
-import com.example.test.dto.BookingDto;
-import com.example.test.dto.HotelDto;
 import com.example.test.dto.RoomTypeDto;
 import com.example.test.dto.commen.PaginatedResultDto;
-import com.example.test.entity.Booking;
-import com.example.test.entity.Hotel;
-import com.example.test.entity.Response;
+import com.example.test.dto.Response;
 import com.example.test.entity.RoomType;
 import com.example.test.exception.ErrorCodes;
 import com.example.test.exception.ResourceNotFoundException;
 import com.example.test.exception.ResourceRelatedException;
-import com.example.test.mapper.HotelMapper;
 import com.example.test.mapper.PaginationMapper;
 import com.example.test.mapper.RoomTypeMapper;
-import com.example.test.service.HotelService;
 import com.example.test.service.RoomTypeService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

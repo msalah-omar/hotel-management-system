@@ -5,7 +5,7 @@ import com.example.test.dto.BookingDto;
 import com.example.test.dto.HotelDto;
 import com.example.test.dto.commen.PaginatedResultDto;
 
-import com.example.test.entity.Response;
+import com.example.test.dto.Response;
 import com.example.test.exception.ErrorCodes;
 import com.example.test.exception.ResourceNotFoundException;
 import com.example.test.exception.ResourceRelatedException;

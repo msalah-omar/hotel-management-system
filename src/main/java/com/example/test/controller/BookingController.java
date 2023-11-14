@@ -48,9 +48,9 @@ public class BookingController
 
     @PostMapping
     @Operation(summary = "Add", description = "this api for add new booking")
-    public ResponseEntity<?> save(@Validated(InsertValidation.class) @RequestBody BookingDto dto ,Integer page,Integer size)
+    public ResponseEntity<?> save(@Validated(InsertValidation.class) @RequestBody BookingDto dto )
     {
-        return bookingHandler.save(dto,page,size);
+        return bookingHandler.save(dto);
     }
 
 
@@ -76,6 +76,7 @@ public class BookingController
         return bookingHandler.getReviewRoomsBasedTimeAvailability(fromDate,toDate);
     }
 
+
     @GetMapping("/views-booking")
     public ResponseEntity<?> userViewsBooking(@RequestParam(value = "id") Integer id) {
         return bookingHandler.userViewsBooking(id);
@@ -83,7 +84,7 @@ public class BookingController
 
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "delete payment By Id")
+    @Operation(summary = "delete booking By Id")
     public ResponseEntity<?> delete(@PathVariable Integer id)
     {
         return bookingHandler.delete(id);
